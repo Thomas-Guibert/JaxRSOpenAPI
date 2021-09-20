@@ -21,16 +21,16 @@ public class JpaTest {
 		ProfessionnelDAO p = new ProfessionnelDAO();
 		RendezVousDAO r = new RendezVousDAO();
 		try {
-			//u.createUser();
-			//p.createProfessionnel();
-			u.showUser(u.getUserByMail("thomas.g@etudiant.univ-rennes1.fr"));
+			u.createUser();
+			p.createProfessionnel();
+			//u.showUser(u.getUserByMail("thomas.g@etudiant.univ-rennes1.fr"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		u.getUserRendezVous("thomas.g@etudiant.univ-rennes1.fr");
-		//r.createRDV(u.getUserByMail("thomas.g@etudiant.univ-rennes1.fr"), p.getProfessionnelByMail("ax@gmail.com").get(0));
-		System.out.println(u.showUser(u.getUserByMail("thomas.g@etudiant.univ-rennes1.fr")));
-		System.out.println(u.showAllUser(u.getAllUser()));
+		//u.getUserRendezVous("thomas.g@etudiant.univ-rennes1.fr");
+		r.createRDV(u.getUserByMail("thomas.g@etudiant.univ-rennes1.fr"), p.getProfessionnelByMail("ax@gmail.com").get(0));
+		//System.out.println(u.showUser(u.getUserByMail("thomas.g@etudiant.univ-rennes1.fr")));
+		//System.out.println(u.showAllUser(u.getAllUser()));
 	
 	}
 

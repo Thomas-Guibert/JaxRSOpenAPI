@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.rest;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -10,6 +11,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -58,12 +62,46 @@ public class UserResource {
 	  UserDAO u = new UserDAO();
       return r.getRdvByMail(u.getUserByMail(mail));
   }
-
+/*
   @POST
+  @Path("/exemple")
   @Consumes("application/json")
   public Response addPet(
       @Parameter(description = "Pet object that needs to be added to the store", required = true) User pet) {
     // add pet
+    return Response.ok().entity("SUCCESS").build();
+  }*/
+  
+  @POST
+  @Path("/addUser/{UserName}/{UserNameF}/{UserMail}/{UserPwd}")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response addUser(@PathParam("UserName") String name,@PathParam("UserNameF") String nameF,@PathParam("UserMail") String mail,@PathParam("UserPwd") String pwd) {
+	UserDAO u = new UserDAO();
+	u.createUser(name, nameF, mail, pwd);
+    return Response.ok().entity("SUCCESS").build();
+  }
+  
+  // Autre solution
+  /*
+  @POST
+  @Path("/addUserS2")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response addUser(User user) {
+	UserDAO u = new UserDAO();
+	u.save(user); // Ajouter save dans la DAO
+    return Response.ok().entity("SUCCESS").build();
+  }
+   */
+  
+  
+  @POST
+  @Path("/addUserBasic")
+  @Consumes("form/user-data")
+  public Response addUserb() {
+	
+    UserDAO u = new UserDAO();
+    u.createUser("TestAjout", "TestF", "mail", "pwd");
+    
     return Response.ok().entity("SUCCESS").build();
   }
 }
